@@ -115,6 +115,7 @@
       background-color: #45a049;
     }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 </head>
 <body>
   <div class="container">
@@ -141,43 +142,27 @@
   </div>
 
   <script>
-    document.getElementById('conditionForm').addEventListener('submit', function(e) {
+    const supabaseUrl = 'https://xxxx.supabase.co' // ← あなたのURLに置き換え
+    const supabaseKey = 'your-anon-key' // ← あなたのAPIキーに置き換え
+    const supabase = supabase.createClient(supabaseUrl, supabaseKey)
+
+    document.getElementById('conditionForm').addEventListener('submit', async function(e) {
       e.preventDefault()
       const name = document.getElementById('username').value
       const condition = document.querySelector('input[name="condition"]:checked')?.value
       const comment = document.getElementById('comment').value
       const timestamp = new Date().toISOString()
 
-      console.log({ name, condition, comment, timestamp })
+      const { data, error } = await supabase.from('weather_feedback').insert([
+        { name, condition, comment, timestamp }
+      ])
 
-      // ここに Supabase 送信処理などを追加できます
-      alert("回答を受け付けました。ありがとうございました！")
+      if (error) {
+        alert('送信に失敗しました：' + error.message)
+      } else {
+        alert('回答を受け付けました。ありがとうございました！')
+      }
     })
   </script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-  <script>
-  const supabaseUrl = 'https://uzyfrplsptljlhqjayff.supabase.co' // ← あなたのURLに置き換え
-  const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV6eWZycGxzcHRsamxocWpheWZmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA5Mzc5ODIsImV4cCI6MjA3NjUxMzk4Mn0.ysm-pWfEo-G9f_LhnbJf4JgIuGPm7jotc0G44L3sMCc' // ← あなたのAPIキーに置き換え
-  const supabase = supabase.createClient(supabaseUrl, supabaseKey)
-
-  document.getElementById('conditionForm').addEventListener('submit', async function(e) {
-    e.preventDefault()
-    const name = document.getElementById('username').value
-    const condition = document.querySelector('input[name="condition"]:checked')?.value
-    const comment = document.getElementById('comment').value
-    const timestamp = new Date().toISOString()
-
-    const { data, error } = await supabase.from('weather_feedback').insert([
-      { name, condition, comment, timestamp }
-    ])
-
-    if (error) {
-      alert('送信に失敗しました：' + error.message)
-    } else {
-      alert('回答を受け付けました。ありがとうございました！')
-    }
-  })
-</script>
 </body>
-
 </html>
