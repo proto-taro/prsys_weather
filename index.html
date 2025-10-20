@@ -149,10 +149,10 @@
     document.getElementById('conditionForm').addEventListener('submit', async function(e) {
       e.preventDefault()
       const name = document.getElementById('username').value
+      const create_at = new Date().toISOString()
       const condition = document.querySelector('input[name="condition"]:checked')?.value
       const comment = document.getElementById('comment').value
-      const timestamp = new Date().toISOString()
-
+    
       const { data, error } = await supabase.from('prsys_weather_feedback').insert([
         { name, create_at, condition, comment }
       ])
@@ -166,5 +166,6 @@
   </script>
 </body>
 </html>
+
 
 
