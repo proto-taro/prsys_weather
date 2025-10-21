@@ -127,9 +127,9 @@
       </div>
 
       <div class="radio-group">
-        <label><input type="radio" name="condition" value="3"> ☀️ 晴れ</label>
-        <label><input type="radio" name="condition" value="2"> 🌥️ 曇り</label>
-        <label><input type="radio" name="condition" value="1"> 🌧️ 雨</label>
+        <label><input type="radio" name="condition" value="3"> ☀️ 3</label>
+        <label><input type="radio" name="condition" value="2"> 🌥️ 2</label>
+        <label><input type="radio" name="condition" value="1"> 🌧️ 1</label>
       </div>
 
       <div class="comment-group">
@@ -154,7 +154,6 @@
       const commentRaw = document.getElementById('comment').value
       const comment = commentRaw.trim() === '' ? null : commentRaw
 
-
       const { data, error } = await supabaseClient.from('prsys_weather_feedback').insert([
         { name, created_at, condition, comment }
       ])
@@ -168,6 +167,7 @@
   </script>
 </body>
 </html>
+
 
 
 
