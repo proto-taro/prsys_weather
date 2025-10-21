@@ -151,8 +151,9 @@
       const name = document.getElementById('username').value
       const created_at = new Date().toISOString()
       const condition = document.querySelector('input[name="condition"]:checked')?.value
-      const comment = document.getElementById('comment').value
+      const commentRaw = document.getElementById('comment').value
       const comment = commentRaw.trim() === '' ? null : commentRaw
+
 
       const { data, error } = await supabaseClient.from('prsys_weather_feedback').insert([
         { name, created_at, condition, comment }
@@ -167,6 +168,7 @@
   </script>
 </body>
 </html>
+
 
 
 
