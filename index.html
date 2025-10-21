@@ -138,8 +138,10 @@
       </div>
 
       <button type="submit">送信</button>
-    </form>
-  </div>
+   </form>
+
+  <div id="thankYouMessage">回答を受け付けました。ありがとうございました！</div>
+
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
   <script>
     const supabaseUrl = 'https://uzyfrplsptljlhqjayff.supabase.co' // ← あなたのURLに置き換え
@@ -157,15 +159,18 @@
         { name, condition, comment }
       ])
 
-      if (error) {
-        alert('送信に失敗しました：' + error.message)
+       if (error) {
+        alert('送信できませんでした: ' + error.message)
       } else {
-        alert('回答を受け付けました。ありがとうございました！')
+        document.getElementById('conditionForm').style.display = 'none'
+        document.getElementById('thankYouMessage').style.display = 'block'
       }
     })
   </script>
+
 </body>
 </html>
+
 
 
 
