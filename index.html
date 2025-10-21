@@ -127,9 +127,9 @@
       </div>
 
       <div class="radio-group">
-        <label><input type="radio" name="condition" value="晴れ"> ☀️ 晴れ</label>
-        <label><input type="radio" name="condition" value="曇り"> 🌥️ 曇り</label>
-        <label><input type="radio" name="condition" value="雨"> 🌧️ 雨</label>
+        <label><input type="radio" name="condition" value="晴れ"> ☀️ 3</label>
+        <label><input type="radio" name="condition" value="曇り"> 🌥️ 2</label>
+        <label><input type="radio" name="condition" value="雨"> 🌧️ 1</label>
       </div>
 
       <div class="comment-group">
@@ -149,12 +149,12 @@
     document.getElementById('conditionForm').addEventListener('submit', async function(e) {
       e.preventDefault()
       const name = document.getElementById('username').value
-      const create_at = new Date().toISOString()
+      const created_at = new Date().toISOString()
       const condition = document.querySelector('input[name="condition"]:checked')?.value
       const comment = document.getElementById('comment').value
     
       const { data, error } = await supabaseClient.from('prsys_weather_feedback').insert([
-        { name, create_at, condition, comment }
+        { name, created_at, condition, comment }
       ])
 
       if (error) {
@@ -166,3 +166,4 @@
   </script>
 </body>
 </html>
+
