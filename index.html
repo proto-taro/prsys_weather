@@ -174,7 +174,24 @@
     const supabaseUrl = 'https://uzyfrplsptljlhqjayff.supabase.co' // ← あなたのURLに置き換え
     const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV6eWZycGxzcHRsamxocWpheWZmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA5Mzc5ODIsImV4cCI6MjA3NjUxMzk4Mn0.ysm-pWfEo-G9f_LhnbJf4JgIuGPm7jotc0G44L3sMCc' // ← あなたのAPIキーに置き換え
     const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey)
+    const supabase = supabase.createClient(
+  'https://kgrvnxtmfgbwpegexwqy.supabase.co',
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtncnZueHRtZmdid3BlZ2V4d3F5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjEyMzUyNTQsImV4cCI6MjA3NjgxMTI1NH0.ePwTBmz-6m4S0AkbE6kGwr68Bsh05CyaD_ZoYTQUfDY'
+)
 
+  async function login(email, password) {
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password
+    })
+    if (error) {
+      alert('ログイン失敗: ' + error.message)
+    } else {
+      alert('ログイン成功！')
+      showSurveyForm()
+    }
+  }
+    
     document.getElementById('conditionForm').addEventListener('submit', async function(e) {
       e.preventDefault()
       const name = document.getElementById('username').value
@@ -198,9 +215,9 @@
   document.body.style.height = '5500px';
   document.body.style.overflow = 'hidden';
   </script>
-
 </body>
 </html>
+
 
 
 
