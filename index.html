@@ -1,169 +1,30 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <title>コンディションチェック</title>
-  <style>
-  body {
-  display: block;
-}
-  body {
-  background-color: #e0f7fa;
-  font-family: 'Segoe UI', sans-serif;
-  font-size: 16px;color: #333;
-  height: auto;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-}
-  }
-
-    .container {
-  padding: 16px;
-  margin: 0 auto;
-  box-sizing: border-box;
-}
-
-    h2 {
-      font-size: 24px;
-      color: #00796b;
-      text-align: center;
-      margin-bottom: 12px;
-    }
-
-    form {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .input-group {
-      width: calc(100% - 20px);
-      margin-bottom: 12px;
-    }
-
-    .input-group label {
-      display: block;
-      margin-bottom: 6px;
-      font-size: 16px;
-    }
-
-    .input-group input[type="text"] {
-      width: calc(100% - 20px);
-      padding: 10px;
-      font-size: 14px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-    }
-
-    .radio-group {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      width: 100%;
-      margin-bottom: 12px;
-    }
-
-    .radio-group label {
-      display: flex;
-      align-items: center;
-      font-size: 20px;
-      margin: 12px 0;
-      padding: 8px 12px;
-      width: 100%;
-      border-radius: 8px;
-      background-color: #f0f0f0;
-      cursor: pointer;
-    }
-
-    .radio-group input[type="radio"] {
-      transform: scale(1.5);
-      margin-right: 12px;
-    }
-
-    .comment-group {
-      width: 100%;
-      margin-bottom: 12px;
-    }
-
-    .comment-group label {
-      display: block;
-      margin-bottom: 6px;
-      font-size: 16px;
-    }
-
-    textarea {
-      width: calc(100% - 20px);
-      padding: 10px;
-      font-size: 14px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-    }
-
-    button {
-      background-color: #4CAF50;
-      color: white;
-      padding: 10px 20px;
-      font-size: 16px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #45a049;
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <title>コンディションアンケート</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script src="script.js" defer></script>
 </head>
 <body>
-  <div class="container">
-    <h2>今日のコンディションを教えてください</h2>
-    <form id="conditionForm">
-      <div class="input-group">
-        <label for="username">お名前：</label>
-        <input type="text" id="username" name="username" placeholder="例：田中太郎">
-      </div>
+  <h1>ログインしてアンケートに回答</h1>
 
-      <div class="radio-group">
-        <label><input type="radio" name="condition" value="3"> ☀️ 3</label>
-        <label><input type="radio" name="condition" value="2"> 🌥️ 2</label>
-        <label><input type="radio" name="condition" value="1"> 🌧️ 1</label>
-      </div>
+  <form id="login-form">
+    <input type="email" id="email" placeholder="メールアドレス" required />
+    <input type="password" id="password" placeholder="パスワード" required />
+    <button type="submit">ログイン</button>
+  </form>
 
-      <div class="comment-group">
-        <label for="comment">備考：</label>
-        <textarea id="comment" name="comment" rows="4" placeholder="気になることがあれば自由にどうぞ"></textarea>
-      </div>
-
-      <button type="submit">送信</button>
-    </form>
-  </div>
-
-  <script>
-    document.getElementById('conditionForm').addEventListener('submit', function(e) {
-      e.preventDefault()
-      const name = document.getElementById('username').value
-      const condition = document.querySelector('input[name="condition"]:checked')?.value
-      const comment = document.getElementById('comment').value
-      const timestamp = new Date().toISOString()
-
-      console.log({ name, condition, comment, timestamp })
-
-      // ここに Supabase 送信処理などを追加できます
-      alert("回答を受け付けました。ありがとうございました！")
-    })
-  </script>
-  <script>
-  document.documentElement.style.overflow = 'hidden';
-  document.body.style.overflow = 'hidden';
-  document.body.style.height = '600px';
-</script>
-<script>
-  document.body.style.height = '550px';
-  document.body.style.overflow = 'hidden';
-</script>
+  <form id="survey-form" style="display:none;">
+    <label>今日のコンディション</label>
+    <select id="condition">
+      <option value="3">☀️ 3</option>
+      <option value="2">🌤️ 2</option>
+      <option value="1">🌧️ 1</option>
+    </select>
+    <label>備考</label>
+    <textarea id="comment" rows="3"></textarea>
+    <button type="submit">送信</button>
+  </form>
 </body>
 </html>
-
-
-
