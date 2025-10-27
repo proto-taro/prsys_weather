@@ -1,233 +1,82 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <title>コンディションチェック</title>
-  <style>
-    body {
-  display: block;
-}
-  body {
-  background-color: #e0f7fa;
-  font-family: 'Segoe UI', sans-serif;
-  font-size: 16px;
-  color: #333;
-  height: auto;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  display: block;
-}
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 
-    .container {
-      background-color: #ffffff;
-      padding: 12px;
-      border-radius: 12px;
-      box-shadow: border-box;
-      max-width: 500px;
-      width: 100%;
-      margin: 0 auto;
-      box-sizing: border-box;
-    }
-
-    h2 {
-      font-size: 24px;
-      color: #00796b;
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    form {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .input-group {
-      width: calc(100% - 20px);
-      margin-bottom: 8px;
-    }
-
-    .input-group label {
-      display: block;
-      margin-bottom: 6px;
-      font-size: 16px;
-    }
-
-    .input-group input[type="text"] {
-      width: calc(100% - 20px);
-      padding: 10px;
-      font-size: 14px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-    }
-
-    .radio-group {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      width: calc(100% - 20px);
-      margin-bottom: 8px;
-    }
-
-    .radio-group label {
-      display: flex;
-      align-items: center;
-      font-size: 20px;
-      margin: 12px 0;
-      padding: 8px 12px;
-      width: calc(100% - 20px);
-      border-radius: 8px;
-      background-color: #f0f0f0;
-      cursor: pointer;
-    }
-
-    .radio-group input[type="radio"] {
-      transform: scale(1.5);
-      margin-right: 8px;
-    }
-
-    .comment-group {
-      width: 100%;
-      margin-bottom: 8px;
-    }
-
-    .comment-group label {
-      display: block;
-      margin-bottom: 6px;
-      font-size: 16px;
-    }
-
-    textarea {
-      width: calc(100% - 20px);
-      padding: 10px;
-      font-size: 14px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-    }
-
-    button {
-      background-color: #4CAF50;
-      color: white;
-      padding: 10px 20px;
-      font-size: 16px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      margin-top: 8px;
-
-    }
-
-    button:hover {
-      background-color: #45a049;
-    }
-  </style>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-  <style>
-    body {
-      font-family: sans-serif;
-      padding: 40px;
-    }
-    #thankYouMessage {
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 1.5em;
-      background-color: #f0f8ff;
-      padding: 20px 30px;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      text-align: center;
-      z-index: 9999;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h2>今日のコンディションを教えてください</h2>
-    <form id="conditionForm">
-      <div class="input-group">
-        <label for="username">お名前：</label>
-        <input type="text" id="username" name="username" placeholder="例：田中太郎">
-      </div>
-
-      <div class="radio-group">
-        <label><input type="radio" name="condition" value="3"> ☀️ 3</label>
-        <label><input type="radio" name="condition" value="2"> 🌥️ 2</label>
-        <label><input type="radio" name="condition" value="1"> 🌧️ 1</label>
-      </div>
-
-      <div class="comment-group">
-        <label for="comment">備考：</label>
-        <textarea id="comment" name="comment" rows="4" placeholder="気になることがあれば自由にどうぞ"></textarea>
-      </div>
-
-      <button type="submit">送信</button>
-   </form>
-
-  <div id="thankYouMessage">回答を受け付けました。ありがとうございました！</div>
-
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-  <script>
-    const supabaseUrl = 'https://uzyfrplsptljlhqjayff.supabase.co' // ← あなたのURLに置き換え
-    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV6eWZycGxzcHRsamxocWpheWZmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA5Mzc5ODIsImV4cCI6MjA3NjUxMzk4Mn0.ysm-pWfEo-G9f_LhnbJf4JgIuGPm7jotc0G44L3sMCc' // ← あなたのAPIキーに置き換え
-    const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey)
-    const supabase = supabase.createClient(
+const supabase = supabase.createClient(
   'https://kgrvnxtmfgbwpegexwqy.supabase.co',
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtncnZueHRtZmdid3BlZ2V4d3F5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjEyMzUyNTQsImV4cCI6MjA3NjgxMTI1NH0.ePwTBmz-6m4S0AkbE6kGwr68Bsh05CyaD_ZoYTQUfDY'
 )
 
-  async function login(email, password) {
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email,
-      password
-    })
-    if (error) {
-      alert('ログイン失敗: ' + error.message)
-    } else {
-      alert('ログイン成功！')
-      showSurveyForm()
-    }
+async function login(email, password) {
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email,
+    password
+  })
+  if (error) {
+    alert('ログイン失敗: ' + error.message)
+  } else {
+    alert('ログイン成功！')
+    showSurveyForm()
   }
-    
-    document.getElementById('conditionForm').addEventListener('submit', async function(e) {
-      e.preventDefault()
-      const name = document.getElementById('username').value
-      const condition = document.querySelector('input[name="condition"]:checked')?.value
-      const commentRaw = document.getElementById('comment').value
-      const comment = commentRaw.trim() === '' ? null : commentRaw
+}
 
-      const { data, error } = await supabaseClient.from('prsys_weather_feedback').insert([
-        { name, condition, comment }
-      ])
+async function submitSurvey(condition, comment) {
+  const {
+    data: { user }
+  } = await supabase.auth.getUser()
 
-       if (error) {
-        alert('送信できませんでした: ' + error.message)
-      } else {
-        document.getElementById('conditionForm').style.display = 'none'
-        document.getElementById('thankYouMessage').style.display = 'block'
-      }
-    })
-  </script>
-  <script>
-  document.body.style.height = '5500px';
-  document.body.style.overflow = 'hidden';
-  </script>
-</body>
-</html>
+  const { error } = await supabase.from('responses').insert([
+    {
+      user_id: user.id,
+      email: user.email,
+      condition: parseInt(condition),
+      comment: comment,
+      submitted_at: new Date().toISOString()
+    }
+  ])
 
+  if (error) {
+    alert('送信失敗: ' + error.message)
+  } else {
+    alert('送信完了！ありがとうございました')
+  }
+}
 
+<!-- ログインフォーム -->
+<form id="login-form">
+  <input type="email" id="email" placeholder="メールアドレス" required />
+  <input type="password" id="password" placeholder="パスワード" required />
+  <button type="submit">ログイン</button>
+</form>
 
+<!-- アンケートフォーム（ログイン後に表示） -->
+<form id="survey-form" style="display:none;">
+  <select id="condition">
+    <option value="3">☀️ 3</option>
+    <option value="2">🌤️ 2</option>
+    <option value="1">🌧️ 1</option>
+  </select>
+  <textarea id="comment" placeholder="備考（任意）"></textarea>
+  <button type="submit">送信</button>
+</form>
 
+<script>
+  document.getElementById('login-form').addEventListener('submit', (e) => {
+    e.preventDefault()
+    login(
+      document.getElementById('email').value,
+      document.getElementById('password').value
+    )
+  })
 
+  function showSurveyForm() {
+    document.getElementById('login-form').style.display = 'none'
+    document.getElementById('survey-form').style.display = 'block'
+  }
 
-
-
-
-
-
-
-
-
+  document.getElementById('survey-form').addEventListener('submit', (e) => {
+    e.preventDefault()
+    submitSurvey(
+      document.getElementById('condition').value,
+      document.getElementById('comment').value
+    )
+  })
+</script>
