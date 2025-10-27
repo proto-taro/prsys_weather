@@ -8,16 +8,18 @@
   display: block;
 }
   body {
+  background-color: #e0f7fa;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 16px;color: #333;
   height: auto;
   margin: 0;
   padding: 0;
   overflow: hidden;
-  display: block;
 }
   }
 
     .container {
-  padding: 20px;
+  padding: 16px;
   margin: 0 auto;
   box-sizing: border-box;
 }
@@ -26,7 +28,7 @@
       font-size: 24px;
       color: #00796b;
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: 12px;
     }
 
     form {
@@ -36,8 +38,8 @@
     }
 
     .input-group {
-      width: 100%;
-      margin-bottom: 20px;
+      width: calc(100% - 20px);
+      margin-bottom: 12px;
     }
 
     .input-group label {
@@ -47,7 +49,7 @@
     }
 
     .input-group input[type="text"] {
-      width: 100%;
+      width: calc(100% - 20px);
       padding: 10px;
       font-size: 14px;
       border-radius: 6px;
@@ -59,7 +61,7 @@
       flex-direction: column;
       align-items: flex-start;
       width: 100%;
-      margin-bottom: 20px;
+      margin-bottom: 12px;
     }
 
     .radio-group label {
@@ -81,7 +83,7 @@
 
     .comment-group {
       width: 100%;
-      margin-bottom: 20px;
+      margin-bottom: 12px;
     }
 
     .comment-group label {
@@ -91,7 +93,7 @@
     }
 
     textarea {
-      width: 100%;
+      width: calc(100% - 20px);
       padding: 10px;
       font-size: 14px;
       border-radius: 6px;
@@ -156,7 +158,12 @@
   document.body.style.overflow = 'hidden';
   document.body.style.height = '600px';
 </script>
+<script>
+  document.body.style.height = '550px';
+  document.body.style.overflow = 'hidden';
+</script>
 </body>
 </html>
+
 
 
